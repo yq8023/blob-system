@@ -1,0 +1,11 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap --registry=https://registry.npm.taobao.org",
+    "dev:web": "cd packages/web && npm run start"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
