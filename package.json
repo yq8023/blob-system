@@ -3,9 +3,17 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --registry=https://registry.npm.taobao.org",
-    "dev:web": "cd packages/web && npm run start"
+    "dev": "concurrently --kill-others \"npm run dev:web\" \"npm run dev:admin\" \"npm run dev:server\"",
+    "dev:admin": "cd packages/admin && npm run dev",
+    "dev:web": "cd packages/web && npm run dev",
+    "build": "concurrently \"npm run build:web\" \"npm run build:admin\"",
+    "build:admin": "cd packages/admin && npm run build",
+    "build:web": "cd packages/web && npm run build"
   },
   "devDependencies": {
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "concurrently": "^7.0.0"
   }
 }
