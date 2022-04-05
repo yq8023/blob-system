@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "@/common/css/reset.css";
-import App from "./App";
+import RouterContainer from "@/router";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import "@/common/css/reset.css";
+import "@/common/css/global.less";
+
+ReactDOM.render(<RouterContainer />, document.getElementById("root"));
