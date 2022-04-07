@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReadOutlined, TagOutlined, HomeOutlined } from "@ant-design/icons";
 import Frame from "@/pages/frame";
 import routes from "./route-config";
