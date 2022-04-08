@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { message, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { RcFile, UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
+import { getRequestBaseUrl, getToken } from "@/api/util";
+import { CommonResp } from "@/api/axios";
 
-const ImageUpload: React.FC = () => {
-  const [imageUrl, setImageUrl] = useState<string>();
+interface ImageUploadPorps {
+  value?: string;
+  onChange?: (value?: string) => void;
+}
+
+const ImageUpload: React.FC<ImageUploadPorps> = ({ value, onChange }) => {
+  const [imageUrl, setImageUrl] = useState<string>(
+    value ? `${getRequestBaseUrl()}/${value}` : ""
+  );
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setImageUrl(value ? `${getRequestBaseUrl()}/${value}` : "");
+  }, [value]);
 
   const getBase64 = (img?: RcFile, callback?: (imgUrl: string) => void) => {
     if (!img) return;
@@ -23,7 +36,9 @@ const ImageUpload: React.FC = () => {
     return isJpgOrPng;
   }
 
-  const handleChange = (info: UploadChangeParam<UploadFile<unknown>>) => {
+  const handleChange = (
+    info: UploadChangeParam<UploadFile<CommonResp<{ path: string }>>>
+  ) => {
     if (info.file.status === "uploading") {
       setLoading(true);
       return;
@@ -35,6 +50,7 @@ const ImageUpload: React.FC = () => {
       });
 
       setLoading(false);
+      onChange?.(info.file.response?.result?.path);
     }
   };
 
@@ -48,7 +64,10 @@ const ImageUpload: React.FC = () => {
   return (
     <Upload
       action="http://localhost:8888/user/upload"
-      name="avatar"
+      name="file"
+      headers={{
+        authorization: getToken(),
+      }}
       listType="picture-card"
       showUploadList={false}
       beforeUpload={beforeUpload}

@@ -1,4 +1,5 @@
-import originAxios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import originAxios, { AxiosRequestConfig } from "axios";
+import { getToken } from "./util";
 
 export type CommonResp<D = any> =
   | {
@@ -7,12 +8,6 @@ export type CommonResp<D = any> =
       result?: D;
     }
   | undefined;
-
-export function getToken() {
-  const cookieArr = document.cookie?.split(";") ?? [];
-  const token = cookieArr.find((item) => /^\s?token=/.test(item)) ?? "";
-  return token.split("=")[1] ?? "";
-}
 
 export default function request<T>(
   option: AxiosRequestConfig
