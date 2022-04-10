@@ -20,12 +20,12 @@ const routes: RouteItem[] = [
     component: Login,
   },
   {
-    path: "/article",
-    component: ArticlePage,
-  },
-  {
     path: "/tag",
     component: TagPage,
+  },
+  {
+    path: "/article",
+    component: ArticlePage,
   },
 ];
 export default routes;

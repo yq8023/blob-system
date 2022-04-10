@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ReadOutlined, TagOutlined, HomeOutlined } from "@ant-design/icons";
+import { ReadOutlined, TagsOutlined, HomeOutlined } from "@ant-design/icons";
 import Frame from "@/pages/frame";
 import routes from "./route-config";
 
@@ -19,14 +19,14 @@ const RouterContainer: React.FC = () => {
       icon: <HomeOutlined />,
     },
     {
+      label: "标签管理",
+      link: "/tag",
+      icon: <TagsOutlined />,
+    },
+    {
       label: "文章管理",
       link: "/article",
       icon: <ReadOutlined />,
-    },
-    {
-      label: "标签管理",
-      link: "/tag",
-      icon: <TagOutlined />,
     },
   ];
   return (

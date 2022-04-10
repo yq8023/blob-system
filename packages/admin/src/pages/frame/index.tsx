@@ -28,11 +28,6 @@ const Frame: React.FC<{ navigations: NavigationItem[] }> = (props) => {
     },
     {
       ready: !noValidePath.includes(pathname),
-      onSuccess: (result, params) => {
-        if (!result) {
-          window.location.href = "/login";
-        }
-      },
     }
   );
 
