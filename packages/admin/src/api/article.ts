@@ -17,7 +17,7 @@ export interface AddArticle {
   tag_ids?: number[];
 }
 
-export function getTagList() {
+export function getArticleList() {
   return request<CommonPagination<Article>>({
     url: "/article/list",
   });

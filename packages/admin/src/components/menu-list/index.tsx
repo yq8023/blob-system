@@ -6,6 +6,7 @@ import { ContainerOutlined, PlusOutlined } from "@ant-design/icons";
 
 export interface MenuListProps<T> {
   data: T[];
+  headerText: string;
   menuClick?: (v: any) => void;
   menuItemConfig?: {
     key?: string;
@@ -17,6 +18,7 @@ export interface MenuListProps<T> {
 function MenuList<T extends { id: number }>(props: MenuListProps<T>) {
   const {
     data,
+    headerText,
     menuClick,
     menuItemConfig: config,
     itemRender,
@@ -28,7 +30,7 @@ function MenuList<T extends { id: number }>(props: MenuListProps<T>) {
       <div className={css["header"]}>
         <div>
           <ContainerOutlined />
-          <span>标签管理</span>
+          <span>{headerText}</span>
         </div>
 
         <PlusOutlined className={css["add-icon"]} onClick={onAddClick} />
@@ -40,11 +42,7 @@ function MenuList<T extends { id: number }>(props: MenuListProps<T>) {
         onClick={menuClick}
       >
         {data.map((v) => (
-          <Menu.Item
-            key={v.id}
-            className={css["menu-item"]}
-            icon={config?.icon}
-          >
+          <Menu.Item key={v.id} icon={config?.icon}>
             {itemRender(v)}
           </Menu.Item>
         ))}

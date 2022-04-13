@@ -20,6 +20,10 @@ const Frame: React.FC<{ navigations: NavigationItem[] }> = (props) => {
     navigate(v.key);
   };
 
+  const getActiveKey = () => {
+    return `/${pathname.split("/")[1]}`;
+  };
+
   // 获取用户信息进行校验
   const { data, refresh } = useRequest(
     async () => {
@@ -42,7 +46,7 @@ const Frame: React.FC<{ navigations: NavigationItem[] }> = (props) => {
             <Sider theme="light" className={css["sider"]} collapsible>
               <div className={css["logo"]}>博客后台</div>
               <Menu
-                defaultSelectedKeys={[navigations[0].link]}
+                defaultSelectedKeys={[getActiveKey()]}
                 onClick={handleActiveUrl}
                 mode="inline"
               >
