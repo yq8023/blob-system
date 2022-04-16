@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import css from "./index.less";
 
-import { getTagList, Tag } from "@/api/tag";
 import { useRequest } from "ahooks";
+import { TagOutlined } from "@ant-design/icons";
+
 import MenuList from "@/components/menu-list";
 import AddTagModal from "@/components/tag/add-tag-modal";
-import { TagOutlined } from "@ant-design/icons";
+import TagDetail from "@/components/tag/tag-detail";
+
+import { getTagList, Tag } from "@/api/tag";
+import EmptyTag from "@/components/tag/empty-tag";
 
 const TagPage: React.FC = () => {
   const [curTag, setCurTag] = useState<number>();
@@ -14,6 +18,12 @@ const TagPage: React.FC = () => {
 
   const { data: tags = [], refresh } = useRequest(async () => {
     const res = await getTagList();
+    const tagMap = new Map<number, Tag>();
+    res?.result?.list.map((v) => {
+      tagMap.set(v.id, v);
+    });
+    setTagMap(tagMap);
+
     return res?.result?.list;
   });
 
@@ -39,8 +49,7 @@ const TagPage: React.FC = () => {
         menuClick={handleMenuClick}
         onAddClick={handleAddClick}
       />
-      {/* <ArticleEdit /> */}
-      <div>right{curTag}</div>
+      {curTag ? <TagDetail tag={tagMap.get(curTag) as Tag} /> : <EmptyTag />}
 
       <AddTagModal
         visible={isModalVisible}
