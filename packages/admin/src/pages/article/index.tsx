@@ -36,8 +36,6 @@ const ArticlePage: React.FC = () => {
     return res?.result?.list;
   });
 
-  console.log(articles, "articles", articleMap);
-
   const handleMenuClick = (values: any) => {
     setCurArticle(Number(values.key));
     setStatus(Status.Edit);
@@ -51,10 +49,16 @@ const ArticlePage: React.FC = () => {
     if (status === Status.Empty) {
       return <EmptyArticle onAddClick={handleAddClick} />;
     } else if (status === Status.Add) {
-      return <ArticleEdit />;
+      return <ArticleEdit onSave={refresh} mode="add" />;
     } else if (status === Status.Edit) {
       if (!curArticle) return <EmptyArticle onAddClick={handleAddClick} />;
-      return <ArticleEdit article={articleMap.get(curArticle) as Article} />;
+      return (
+        <ArticleEdit
+          mode="edit"
+          article={articleMap.get(curArticle) as Article}
+          onSave={refresh}
+        />
+      );
     }
   };
   return (

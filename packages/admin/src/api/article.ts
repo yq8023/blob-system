@@ -23,10 +23,18 @@ export function getArticleList() {
   });
 }
 
-export function addTag(data: AddArticle) {
+export function addArticle(data: AddArticle) {
   return request({
     url: "/article/add",
     method: "post",
     data: data,
+  });
+}
+
+export function deleteArticle(id: number) {
+  return request({
+    url: "/article/delete",
+    method: "post",
+    data: { id },
   });
 }
