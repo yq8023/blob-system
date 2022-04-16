@@ -38,3 +38,15 @@ export function deleteArticle(id: number) {
     data: { id },
   });
 }
+
+export function uploadImg(file: File) {
+  const data = new FormData();
+  data.append("file", file);
+
+  return request<{ path: string }>({
+    url: "/article/img_upload",
+    method: "post",
+    headers: { "Content-Type": "multipart/form-data" },
+    data,
+  });
+}

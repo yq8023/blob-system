@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import css from "./index.less";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
-import { addArticle, Article, deleteArticle } from "@/api/article";
+import { addArticle, Article, deleteArticle, uploadImg } from "@/api/article";
 import { Button, Input, message } from "antd";
 import TagSelect from "@/components/tag/tag-select";
 import { Tag } from "@/api/tag";
@@ -41,8 +41,13 @@ const ArticleEdit: React.FC<ArticleEditProps> = ({ article, onSave, mode }) => {
     setContent(data.text);
   };
 
-  const onImageUpload = (file: File) => {
-    console.log(file, "file");
+  const onImageUpload = async (file: File, callback: (url: string) => void) => {
+    const resp = await uploadImg(file);
+    if (resp?.result) {
+      callback(resp.result.path);
+    } else {
+      message.error("上传图片出错");
+    }
   };
 
   const handleSave = async () => {
