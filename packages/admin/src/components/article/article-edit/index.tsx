@@ -6,6 +6,7 @@ import { addArticle, Article, deleteArticle, uploadImg } from "@/api/article";
 import { Button, Input, message } from "antd";
 import TagSelect from "@/components/tag/tag-select";
 import { Tag } from "@/api/tag";
+import { getRequestBaseUrl } from "@/api/util";
 
 interface ArticleEditProps {
   mode?: "add" | "edit";
@@ -44,7 +45,7 @@ const ArticleEdit: React.FC<ArticleEditProps> = ({ article, onSave, mode }) => {
   const onImageUpload = async (file: File, callback: (url: string) => void) => {
     const resp = await uploadImg(file);
     if (resp?.result) {
-      callback(resp.result.path);
+      callback(getRequestBaseUrl() + "/" + resp.result.path);
     } else {
       message.error("上传图片出错");
     }

@@ -1,11 +1,21 @@
 import React from "react";
-import { Button } from "antd";
+import { BrowserRouter } from "react-router-dom";
+import { renderRoutes } from "react-router-config";
+import Articles from "@/pages/articles";
+
+import routers from "./router";
+import BlobInfo from "./pages/blob-info";
+
 function App() {
   return (
-    <div>
-      <header>前台</header>
-      <Button type="primary">Button</Button>
-    </div>
+    <BrowserRouter>
+      <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
+        <BlobInfo />
+        <Articles />
+        {/* 暂时不用路由 */}
+        {/* {renderRoutes(routers)} */}
+      </div>
+    </BrowserRouter>
   );
 }
 
