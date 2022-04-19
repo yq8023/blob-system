@@ -39,7 +39,10 @@ const ArticleItem: React.FC<ArticleItemProps> = (props) => {
         <MdEditor
           value={article.content}
           style={{ border: "none", padding: 0 }}
-          renderHTML={(text) => mdParser.render(text)}
+          renderHTML={(text) => {
+            console.log(mdParser.render(text));
+            return mdParser.render(text);
+          }}
           view={{ menu: false, md: false, html: true }}
         />
       </div>
