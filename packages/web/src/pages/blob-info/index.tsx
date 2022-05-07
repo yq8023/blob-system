@@ -29,6 +29,17 @@ const BlobInfo: React.FC = () => {
         </div>
         <a className={css["home"]}>主页</a>
       </div>
+
+      <div className={css["music"]}>
+        <iframe
+          frameBorder="no"
+          marginWidth={0}
+          marginHeight={0}
+          width="230"
+          height="86"
+          src="//music.163.com/outchain/player?type=2&id=167850&auto=1&height=66"
+        ></iframe>
+      </div>
     </div>
   );
 };

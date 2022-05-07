@@ -11,9 +11,12 @@ import MarkdownIt from "markdown-it";
 
 interface ArticleItemProps {
   article: Article;
+  handleView?: (article: Article) => void;
+  handleBack?: () => void;
+  is_detail?: boolean;
 }
 const ArticleItem: React.FC<ArticleItemProps> = (props) => {
-  const { article } = props;
+  const { article, handleView, handleBack, is_detail = false } = props;
   const mdParser = new MarkdownIt();
 
   const getTime = () => {
@@ -33,7 +36,10 @@ const ArticleItem: React.FC<ArticleItemProps> = (props) => {
         </div>
       </div>
 
-      <div className={css["content"]}>
+      <div
+        className={css["content"]}
+        style={{ height: is_detail ? "100%" : "250px" }}
+      >
         <MdEditor
           value={article.content}
           style={{ border: "none", padding: 0 }}
@@ -49,7 +55,25 @@ const ArticleItem: React.FC<ArticleItemProps> = (props) => {
             <TagItem key={v.id} tag={v} />
           ))}
         </div>
-        <div className={css["read-all"]}>查看全文{" >>"}</div>
+        {is_detail ? (
+          <div
+            className={css["read-all"]}
+            onClick={() => {
+              handleBack?.();
+            }}
+          >
+            {"<< "}返回
+          </div>
+        ) : (
+          <div
+            className={css["read-all"]}
+            onClick={() => {
+              handleView?.(article);
+            }}
+          >
+            查看全文{" >>"}
+          </div>
+        )}
       </div>
     </div>
   );

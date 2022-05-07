@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 
 import routers from "./router";
 import BlobInfo from "./pages/blob-info";
+import "./mouseClick.js";
 
 function App() {
   return (
