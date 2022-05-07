@@ -26,9 +26,9 @@ export interface User {
   blob_description?: string; // 博客介绍
 }
 
-export function getInfome() {
+export function getBlogInfo() {
   return request<User>({
-    url: "/user/me",
+    url: "/user/getBlogInfo",
   });
 }
 

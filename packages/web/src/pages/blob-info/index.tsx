@@ -2,11 +2,11 @@ import React from "react";
 import css from "./index.less";
 
 import { useRequest } from "ahooks";
-import { getInfome } from "@/api/blob";
+import { getBlogInfo } from "@/api/blob";
 
 const BlobInfo: React.FC = () => {
   const { data, refresh } = useRequest(async () => {
-    const res = await getInfome();
+    const res = await getBlogInfo();
     return res?.result;
   });
 

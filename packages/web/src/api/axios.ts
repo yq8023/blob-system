@@ -1,9 +1,6 @@
 import originAxios, { AxiosRequestConfig } from "axios";
-import { getToken } from "./util";
 
 const Success_Code = 0;
-const Unauthorized_Code = 10101;
-const Invalid_Token = 10102;
 
 export type CommonResp<D = any> =
   | {
@@ -31,14 +28,6 @@ export default function request<T>(
 
     instance.interceptors.request.use(
       (config) => {
-        if (config.headers) {
-          config.headers.authorization = getToken();
-        } else {
-          config.headers = {
-            authorization: getToken(),
-          };
-        }
-
         config.withCredentials = true;
         return config;
       },
@@ -73,12 +62,6 @@ export default function request<T>(
     instance(option)
       .then((res) => {
         if (res.data.code === Success_Code) {
-          resolve(res.data);
-        } else if (
-          res.data.code === Unauthorized_Code ||
-          res.data.code === Invalid_Token
-        ) {
-          window.location.href = "/login";
           resolve(res.data);
         } else {
           reject(res.data);

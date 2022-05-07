@@ -16,12 +16,10 @@ const ArticleItem: React.FC<ArticleItemProps> = (props) => {
   const { article } = props;
   const mdParser = new MarkdownIt();
 
-  console.log(article);
-
   const getTime = () => {
     const date = new Date(article.createdAt!);
     return (
-      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay()
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
     );
   };
 
@@ -39,10 +37,7 @@ const ArticleItem: React.FC<ArticleItemProps> = (props) => {
         <MdEditor
           value={article.content}
           style={{ border: "none", padding: 0 }}
-          renderHTML={(text) => {
-            console.log(mdParser.render(text));
-            return mdParser.render(text);
-          }}
+          renderHTML={(text) => mdParser.render(text)}
           view={{ menu: false, md: false, html: true }}
         />
       </div>
